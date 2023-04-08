@@ -6,14 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.yourmovie.presentation.component.BottomNavigationView
+import com.example.yourmovie.presentation.component.navigation.BottomNavigationView
 import com.example.yourmovie.presentation.view.ui.theme.YourMovieTheme
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,13 +32,5 @@ class MainActivity : ComponentActivity() {
 
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    YourMovieTheme {
-        BottomNavigationView()
     }
 }
