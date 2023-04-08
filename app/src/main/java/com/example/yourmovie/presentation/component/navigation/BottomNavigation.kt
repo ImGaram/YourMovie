@@ -1,4 +1,4 @@
-package com.example.yourmovie.presentation.component
+package com.example.yourmovie.presentation.component.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.material.*

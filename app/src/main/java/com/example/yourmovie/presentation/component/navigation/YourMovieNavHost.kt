@@ -1,4 +1,4 @@
-package com.example.yourmovie.presentation.component
+package com.example.yourmovie.presentation.component.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
