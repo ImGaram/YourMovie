@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    kotlin("kapt")
 }
 
 android {
@@ -50,6 +53,21 @@ android {
 }
 
 dependencies {
+    // room
+    implementation(Dependency.Room.ROOM_KTX)
+    implementation(Dependency.Room.ROOM_RUNTIME)
+    annotationProcessor(Dependency.Room.ROOM_COMPILER)
+    kapt(Dependency.Room.ROOM_COMPILER_KAPT)
+
+    // hilt
+    implementation(Dependency.Hilt.HILT_ANDROID)
+    kapt(Dependency.Hilt.HILT_ANDROID_COMPILER)
+
+    // retrofit
+    implementation(Dependency.Retrofit.RETROFIT_KT)
+    implementation(Dependency.Retrofit.RETROFIT_GSON_CONVERTER)
+    implementation(Dependency.Okhttp.OKHTTP)
+    implementation(Dependency.Okhttp.OKHTTP_LOGGING_INTERCEPTOR)
 
     implementation(Dependency.AndroidX.KOTLIN_CORE)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
@@ -57,10 +75,14 @@ dependencies {
     implementation(Dependency.Compose.COMPOSE_UI)
     implementation(Dependency.Compose.COMPOSE_UI_PREVIEW)
     implementation(Dependency.Compose.COMPOSE_MATERIAL)
+    implementation(Dependency.Compose.COMPOSE_NAVIGATION)
     testImplementation(Dependency.Test.JUNIT)
     androidTestImplementation(Dependency.AndroidTest.TEST_JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO)
     androidTestImplementation(Dependency.AndroidTest.COMPOSE_JUNIT)
     debugImplementation(Dependency.Debug.COMPOSE_TOOLING)
     debugImplementation(Dependency.Debug.COMPOSE_MANIFEST)
+
+    implementation(Dependency.LifeCycle.LIFECYCLE_VIEWMODEL)
+    implementation(Dependency.LifeCycle.LIFECYCLE_LIVEDATA)
 }
