@@ -7,5 +7,5 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
-val BtmSelectColor = Color(0xFFff0000)
-val BtmUnSelectColor = Color(0xFF8D0000)
+val BtmSelectColor = Color.White
+val BtmUnSelectColor = Color(0xFF616161)
