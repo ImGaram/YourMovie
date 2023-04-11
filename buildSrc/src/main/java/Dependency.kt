@@ -9,6 +9,7 @@ object Dependency {
     object AndroidX {
         const val KOTLIN_CORE = "androidx.core:core-ktx:${Versions.Kotlin}"
         const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LifeCycle}"
+        const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.Fragment}"
     }
 
     object Compose {
@@ -17,6 +18,10 @@ object Dependency {
         const val COMPOSE_UI_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${Versions.Compose}"
         const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Versions.Material}"
         const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:${Versions.NavigationCompose}"
+    }
+
+    object Coil {
+        const val COIL = "com.github.skydoves:landscapist-coil:${Versions.Coil}"
     }
 
     object Room {
@@ -30,6 +35,7 @@ object Dependency {
         const val HILT_ANDROID_GRADLE = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Hilt}"
         const val HILT_ANDROID = "com.google.dagger:hilt-android:${Versions.Hilt}"
         const val HILT_ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.Hilt}"
+        const val HILT_NAVIGATION_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Versions.HiltNavigationCompose}"
     }
 
     object Retrofit {

@@ -4,17 +4,22 @@ object Versions {
     const val ActivityCompose = "1.3.0"
     const val NavigationCompose = "2.4.1"
 
+    const val Fragment = "1.5.6"
+
     const val LifeCycleRuntime = "2.3.1"
     const val Material = "1.2.0"
 
     const val Hilt = "2.44"
+    const val HiltNavigationCompose = "1.0.0"
 
     const val Room = "2.4.3"
+
+    const val Coil = "2.1.10"
 
     const val Retrofit = "2.7.1"
     const val Okhttp = "3.14.9"
     const val Gson = "2.9.0"
-    const val OKHTTP = "3.14.9"
+    const val OKHTTP = "4.9.2"
 
     const val LifeCycle = "2.3.1"
     const val LifeCycleVersion = "2.5.1"

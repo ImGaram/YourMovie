@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -21,6 +23,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "API_KEY", getApiKey("API_KEY"))
     }
 
     buildTypes {
@@ -52,6 +56,10 @@ android {
     }
 }
 
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+}
+
 dependencies {
     // room
     implementation(Dependency.Room.ROOM_KTX)
@@ -61,7 +69,11 @@ dependencies {
 
     // hilt
     implementation(Dependency.Hilt.HILT_ANDROID)
+    implementation(Dependency.Hilt.HILT_NAVIGATION_COMPOSE)
     kapt(Dependency.Hilt.HILT_ANDROID_COMPILER)
+
+    // coil
+    implementation(Dependency.Coil.COIL)
 
     // retrofit
     implementation(Dependency.Retrofit.RETROFIT_KT)
@@ -71,6 +83,7 @@ dependencies {
 
     implementation(Dependency.AndroidX.KOTLIN_CORE)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME)
+    implementation(Dependency.AndroidX.FRAGMENT_KTX)
     implementation(Dependency.Compose.ACTIVITY_COMPOSE)
     implementation(Dependency.Compose.COMPOSE_UI)
     implementation(Dependency.Compose.COMPOSE_UI_PREVIEW)
