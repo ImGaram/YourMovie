@@ -9,12 +9,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.yourmovie.R
 import com.example.yourmovie.model.data.MovieItemData
 import com.skydoves.landscapist.coil.CoilImage
 
@@ -41,8 +45,13 @@ fun MovieCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CoilImage(
-                    imageModel = { "https://image.tmdb.org/t/p/w200${movieItemData.posterPath}" },
-                    modifier = Modifier.wrapContentSize()
+                    imageModel = {
+                        if (movieItemData.posterPath == null) R.drawable.empty_movie
+                        else "https://image.tmdb.org/t/p/w200${movieItemData.posterPath}"
+                    },
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .size(width = 200.dp, height = 300.dp)
                 )
 
                 Text(

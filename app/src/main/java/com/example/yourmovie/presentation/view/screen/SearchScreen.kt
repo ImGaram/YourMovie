@@ -25,42 +25,39 @@ import kotlinx.coroutines.flow.collect
 fun SearchScreen(
     searchMovieViewModel: SearchMovieViewModel
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 56.dp)
+            .background(Color.Black)
     ) {
-        Column(
+        var textValue by remember { mutableStateOf("") }
+
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
+                .fillMaxWidth()
+                .padding(top = 20.dp, start = 10.dp, end = 10.dp, bottom = 20.dp)
         ) {
-            var textValue by remember { mutableStateOf("") }
+            MovieSearchView(
+                value = textValue,
+                hint = "검색어를 입력하세요.",
+                searchMovieViewModel = searchMovieViewModel,
+                onValueChange = { text -> textValue = text }
+            )
+        }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp, start = 10.dp, end = 10.dp)
-            ) {
-                MovieSearchView(
-                    value = textValue,
-                    hint = "검색어를 입력하세요.",
-                    searchMovieViewModel = searchMovieViewModel,
-                    onValueChange = { text -> textValue = text }
-                )
-            }
-
-            AnimatedVisibility(visible = !searchMovieViewModel.isLoading.value!!) {
-                val result = searchMovieViewModel.searchMovie.collectAsState()
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    content = {
-                        if (result.value != null) {
-                            items(result.value!!.results) { item ->
-                                MovieCard(movieItemData = item)
-                            }
+        AnimatedVisibility(visible = !searchMovieViewModel.isLoading.value!!) {
+            val result = searchMovieViewModel.searchMovie.collectAsState()
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                content = {
+                    if (result.value != null) {
+                        items(result.value!!.results) { item ->
+                            MovieCard(movieItemData = item)
                         }
                     }
-                )
-            }
+                }
+            )
         }
     }
 }
