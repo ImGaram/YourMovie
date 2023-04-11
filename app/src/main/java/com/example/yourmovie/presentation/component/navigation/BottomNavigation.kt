@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.yourmovie.presentation.view.ui.theme.BtmSelectColor
 import com.example.yourmovie.presentation.view.ui.theme.BtmUnSelectColor
+import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
     object BoxOffice: BottomNavItem("movie", Icons.Filled.Home, "영화")
@@ -21,7 +22,7 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BottomNavigationView() {
+fun BottomNavigationView(searchMovieViewModel: SearchMovieViewModel) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -57,6 +58,6 @@ fun BottomNavigationView() {
             }
         }
     ) {
-        YourMovieNavItem(navController = navController)
+        YourMovieNavItem(navController = navController, searchMovieViewModel = searchMovieViewModel)
     }
 }

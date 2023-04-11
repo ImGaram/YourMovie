@@ -1,6 +1,8 @@
 package com.example.yourmovie.presentation.view.screen
 
 import android.annotation.SuppressLint
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -12,12 +14,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.yourmovie.BuildConfig
 import com.example.yourmovie.presentation.component.card.MovieCard
 import com.example.yourmovie.presentation.component.search.MovieSearchView
+import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
+import kotlinx.coroutines.flow.collect
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SearchScreen() {
+fun SearchScreen(
+    searchMovieViewModel: SearchMovieViewModel
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -31,25 +38,29 @@ fun SearchScreen() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp)
+                    .padding(top = 20.dp, start = 10.dp, end = 10.dp)
             ) {
                 MovieSearchView(
                     value = textValue,
                     hint = "검색어를 입력하세요.",
-                    onValueChange = {text -> textValue = text }
+                    searchMovieViewModel = searchMovieViewModel,
+                    onValueChange = { text -> textValue = text }
                 )
             }
 
-            val list = listOf(1,2,3,4,5,6,7,8)
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                content = {
-                    items(list) { item ->
-                        MovieCard()
+            AnimatedVisibility(visible = !searchMovieViewModel.isLoading.value!!) {
+                val result = searchMovieViewModel.searchMovie.collectAsState()
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    content = {
+                        if (result.value != null) {
+                            items(result.value!!.results) { item ->
+                                MovieCard(movieItemData = item)
+                            }
+                        }
                     }
-                },
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-            )
+                )
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 bottomBar = {
-                    BottomNavigationView()
+                    BottomNavigationView(searchMovieViewModel = searchMovieViewModel)
                 }
             ) {
 
