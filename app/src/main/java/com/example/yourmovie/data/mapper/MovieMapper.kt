@@ -8,24 +8,29 @@ import com.example.yourmovie.model.data.SearchMovieResponseData
 object MovieMapper {
     fun searchMovieToData(searchMovieResponse: SearchMovieResponse): SearchMovieResponseData {
         return SearchMovieResponseData(
-            lastBuildDate = searchMovieResponse.lastBuildDate,
-            total = searchMovieResponse.total,
-            start = searchMovieResponse.start,
-            display = searchMovieResponse.display,
-            movieItems = searchMovieResponse.movieItems.map { movieItemToData(it) }
+            page = searchMovieResponse.page,
+            results = searchMovieResponse.results.map { movieItemToData(it) },
+            totalPages = searchMovieResponse.totalPages,
+            totalResults = searchMovieResponse.totalResults
         )
     }
 
     private fun movieItemToData(movieItem: MovieItem): MovieItemData {
         return MovieItemData(
+            adult = movieItem.adult,
+            backdropPath = movieItem.backdropPath,
+            genreIds = movieItem.genreIds,
+            id = movieItem.id,
+            originalLanguage = movieItem.originalLanguage,
+            originalTitle = movieItem.originalTitle,
+            overview = movieItem.overview,
+            posterPath = movieItem.posterPath,
+            popularity = movieItem.popularity,
+            releaseDate = movieItem.releaseDate,
             title = movieItem.title,
-            link = movieItem.link,
-            image = movieItem.image,
-            subtitle = movieItem.subtitle,
-            pubDate = movieItem.pubDate,
-            director = movieItem.director,
-            actor = movieItem.actor,
-            userRating = movieItem.userRating
+            video = movieItem.video,
+            voteAverage = movieItem.voteAverage,
+            voteCount = movieItem.voteCount
         )
     }
 }

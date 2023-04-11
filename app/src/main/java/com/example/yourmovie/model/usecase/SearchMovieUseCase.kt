@@ -9,10 +9,9 @@ class SearchMovieUseCase @Inject constructor(
     private val searchMovieRepository: SearchMovieRepository
 ) {
     suspend operator fun invoke(
-        clientId: String,
-        clientSecret: String,
+        apiKey: String,
         query: String
     ): Flow<SearchMovieResponseData> {
-        return searchMovieRepository.searchMovie(clientId, clientSecret, query)
+        return searchMovieRepository.searchMovie(apiKey, query)
     }
 }

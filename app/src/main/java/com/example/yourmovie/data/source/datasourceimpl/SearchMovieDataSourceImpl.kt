@@ -11,12 +11,11 @@ class SearchMovieDataSourceImpl @Inject constructor(
     private val searchMovieService: SearchMovieService
 ): SearchMovieDataSource {
     override suspend fun searchMovie(
-        clientId: String,
-        clientSecret: String,
+        apiKey: String,
         query: String
     ): Flow<SearchMovieResponse> {
         return flow {
-            emit(searchMovieService.searchMovie(clientId, clientSecret, query))
+            emit(searchMovieService.searchMovie(apiKey, query))
         }
     }
 }

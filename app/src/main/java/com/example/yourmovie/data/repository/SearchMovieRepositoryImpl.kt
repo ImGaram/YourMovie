@@ -12,12 +12,11 @@ class SearchMovieRepositoryImpl @Inject constructor(
     private val searchMovieDataSource: SearchMovieDataSource
 ): SearchMovieRepository {
     override suspend fun searchMovie(
-        clientId: String,
-        clientSecret: String,
+        apiKey: String,
         query: String
     ): Flow<SearchMovieResponseData> {
         return flow {
-            searchMovieDataSource.searchMovie(clientId, clientSecret, query).collect {
+            searchMovieDataSource.searchMovie(apiKey, query).collect {
                 emit(MovieMapper.searchMovieToData(it))
             }
         }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -15,16 +14,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import com.example.yourmovie.BuildConfig
+import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
+import java.net.URLEncoder
 
 @Composable
 fun MovieSearchView(
     value: String,
     hint: String,
     maxLines: Int = 1,
+    searchMovieViewModel: SearchMovieViewModel,
     onValueChange: (String) -> Unit
 ) {
     Row(
@@ -65,7 +66,10 @@ fun MovieSearchView(
                 .padding(5.dp)
                 .size(24.dp)
                 .clickable {
-
+                    searchMovieViewModel.searchMovie(
+                        apiKey = BuildConfig.API_KEY,
+                        query = value
+                    )
                 },
             tint = Color.White
         )

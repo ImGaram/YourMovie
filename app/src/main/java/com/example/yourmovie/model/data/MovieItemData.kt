@@ -1,12 +1,19 @@
 package com.example.yourmovie.model.data
 
+
 data class MovieItemData(
+    val adult: Boolean,
+    val backdropPath: String?,
+    val genreIds: List<Int>,
+    val id: Int,
+    val originalLanguage: String?,
+    val originalTitle: String?,
+    val overview: String?,
+    val popularity: Double,
+    val posterPath: String?,
+    val releaseDate: String?,
     val title: String,
-    val link: String,
-    val image: String,
-    val subtitle: String,
-    val pubDate: String,
-    val director: String,
-    val actor: String,
-    val userRating: String
+    val video: Boolean,
+    val voteAverage: Double?,
+    val voteCount: Int
 )

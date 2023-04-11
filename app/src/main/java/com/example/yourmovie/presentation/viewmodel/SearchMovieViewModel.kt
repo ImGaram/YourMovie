@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourmovie.model.data.SearchMovieResponseData
 import com.example.yourmovie.model.usecase.SearchMovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SearchMovieViewModel @Inject constructor(
     private val searchMovieUseCase: SearchMovieUseCase
 ): ViewModel() {
@@ -21,11 +23,10 @@ class SearchMovieViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun searchMovie(
-        clientId: String,
-        clientSecret: String,
+        apiKey: String,
         query: String
     ) = viewModelScope.launch {
-        searchMovieUseCase(clientId, clientSecret, query).onStart {
+        searchMovieUseCase(apiKey, query).onStart {
             _isLoading.value = true
         }.onCompletion {
             _isLoading.value = false
@@ -33,6 +34,7 @@ class SearchMovieViewModel @Inject constructor(
             Log.e("TAG", "searchMovie: ${error.printStackTrace()}", error.cause)
         }.collect {
             _searchMovie.value = it
+            Log.d("TAG", "searchMovie search movie: ${_searchMovie.value}")
         }
     }
 }

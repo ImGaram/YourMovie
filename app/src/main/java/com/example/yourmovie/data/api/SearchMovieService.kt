@@ -6,10 +6,9 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface SearchMovieService {
-    @GET("/v1/search/movie.json")
+    @GET("3/search/movie?language=ko-KR&page=1")
     suspend fun searchMovie(
-        @Header("X-Naver-Client-Id") clientId: String,
-        @Header("X-Naver-Client-Secret") clientSecret: String,
+        @Query("api_key") apiKey: String,
         @Query("query") query: String
     ): SearchMovieResponse
 }

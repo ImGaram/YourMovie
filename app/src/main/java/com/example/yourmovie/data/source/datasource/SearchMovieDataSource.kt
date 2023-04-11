@@ -5,8 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchMovieDataSource {
     suspend fun searchMovie(
-        clientId: String,
-        clientSecret: String,
+        apiKey: String,
         query: String
     ): Flow<SearchMovieResponse>
 }

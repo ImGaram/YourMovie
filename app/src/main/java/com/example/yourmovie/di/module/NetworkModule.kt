@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    const val BASE_URL = "https://openapi.naver.com"
+    const val BASE_URL = "https://api.themoviedb.org/"
 
     @Provides
     @Singleton
