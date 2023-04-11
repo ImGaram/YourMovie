@@ -18,7 +18,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.yourmovie.BuildConfig
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
-import java.net.URLEncoder
 
 @Composable
 fun MovieSearchView(
