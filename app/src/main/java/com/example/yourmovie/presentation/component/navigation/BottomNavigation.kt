@@ -11,13 +11,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.yourmovie.presentation.component.navigation.screen.Screen
 import com.example.yourmovie.presentation.view.ui.theme.BtmSelectColor
 import com.example.yourmovie.presentation.view.ui.theme.BtmUnSelectColor
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
-    object BoxOffice: BottomNavItem("movie", Icons.Filled.Home, "영화")
-    object Search: BottomNavItem("search", Icons.Filled.Search, "검색")
+    object Movie: BottomNavItem(Screen.Movie.route, Icons.Filled.Home, "영화")
+    object Search: BottomNavItem(Screen.Search.route, Icons.Filled.Search, "검색")
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -33,7 +34,7 @@ fun BottomNavigationView(searchMovieViewModel: SearchMovieViewModel) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
                 val items = listOf(
-                    BottomNavItem.BoxOffice,
+                    BottomNavItem.Movie,
                     BottomNavItem.Search
                 )
 
