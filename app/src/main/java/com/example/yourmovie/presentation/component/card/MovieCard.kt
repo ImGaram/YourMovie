@@ -15,14 +15,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.yourmovie.R
 import com.example.yourmovie.model.data.MovieItemData
+import com.example.yourmovie.presentation.component.navigation.screen.Screen
 import com.skydoves.landscapist.coil.CoilImage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MovieCard(
-    movieItemData: MovieItemData
+    movieItemData: MovieItemData,
+    navController: NavHostController
 ) {
     Box(
         modifier = Modifier
@@ -31,7 +34,10 @@ fun MovieCard(
             .clip(RoundedCornerShape(16.dp)),
     ) {
         Card(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val data = navController.currentBackStackEntry?.savedStateHandle?.set(key = "data", value = movieItemData)
+                navController.navigate(Screen.Detail.route)
+            },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
