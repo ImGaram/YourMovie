@@ -1,5 +1,6 @@
 package com.example.yourmovie.model.data
 
+import java.io.Serializable
 
 data class MovieItemData(
     val adult: Boolean,
@@ -16,4 +17,4 @@ data class MovieItemData(
     val video: Boolean,
     val voteAverage: Double?,
     val voteCount: Int
-)
+): Serializable
