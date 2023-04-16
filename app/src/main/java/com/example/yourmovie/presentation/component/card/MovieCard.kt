@@ -1,5 +1,6 @@
 package com.example.yourmovie.presentation.component.card
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,24 +10,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.yourmovie.R
 import com.example.yourmovie.model.data.MovieItemData
-import com.example.yourmovie.presentation.component.navigation.screen.Screen
+import com.example.yourmovie.presentation.view.detail.DetailActivity
 import com.skydoves.landscapist.coil.CoilImage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MovieCard(
-    movieItemData: MovieItemData,
-    navController: NavHostController
-) {
+fun MovieCard(movieItemData: MovieItemData) {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -35,8 +35,10 @@ fun MovieCard(
     ) {
         Card(
             onClick = {
-                val data = navController.currentBackStackEntry?.savedStateHandle?.set(key = "data", value = movieItemData)
-                navController.navigate(Screen.Detail.route)
+                context.startActivity(
+                    Intent(context, DetailActivity::class.java)
+                        .putExtra("data", movieItemData)
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()

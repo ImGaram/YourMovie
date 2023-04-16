@@ -51,8 +51,7 @@ fun SearchScreen(
                     if (result.value != null) {
                         items(result.value!!.results) { item ->
                             MovieCard(
-                                movieItemData = item,
-                                navController = navController
+                                movieItemData = item
                             )
                         }
                     }
