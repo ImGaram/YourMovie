@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.yourmovie.presentation.component.card.MovieCard
 import com.example.yourmovie.presentation.component.search.MovieSearchView
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
@@ -18,7 +19,8 @@ import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(
-    searchMovieViewModel: SearchMovieViewModel
+    searchMovieViewModel: SearchMovieViewModel,
+    navController: NavHostController
 ) {
     Column(
         modifier = Modifier
@@ -48,7 +50,10 @@ fun SearchScreen(
                 content = {
                     if (result.value != null) {
                         items(result.value!!.results) { item ->
-                            MovieCard(movieItemData = item)
+                            MovieCard(
+                                movieItemData = item,
+                                navController = navController
+                            )
                         }
                     }
                 }
