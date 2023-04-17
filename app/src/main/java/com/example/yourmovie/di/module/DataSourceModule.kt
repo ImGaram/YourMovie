@@ -1,5 +1,6 @@
 package com.example.yourmovie.di.module
 
+import com.example.yourmovie.data.source.datasource.MovieDetailDataSource
 import com.example.yourmovie.data.source.datasource.SearchMovieDataSource
 import com.example.yourmovie.data.source.datasourceimpl.SearchMovieDataSourceImpl
 import dagger.Binds
@@ -14,4 +15,9 @@ abstract class DataSourceModule {
     abstract fun provideSearchMovieDataSource(
         searchMovieDataSourceImpl: SearchMovieDataSourceImpl
     ): SearchMovieDataSource
+
+    @Binds
+    abstract fun provideMovieDetailDataSource(
+        movieDetailDataSourceImpl: SearchMovieDataSourceImpl
+    ): MovieDetailDataSource
 }

@@ -1,5 +1,6 @@
 package com.example.yourmovie.di.module
 
+import com.example.yourmovie.data.api.MovieDetailService
 import com.example.yourmovie.data.api.SearchMovieService
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -54,7 +55,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideFineDustService(retrofit: Retrofit): SearchMovieService {
+    fun provideSearchMovieService(retrofit: Retrofit): SearchMovieService {
         return retrofit.create(SearchMovieService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailService(retrofit: Retrofit): MovieDetailService {
+        return retrofit.create(MovieDetailService::class.java)
     }
 }

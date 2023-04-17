@@ -1,6 +1,8 @@
 package com.example.yourmovie.di.module
 
+import com.example.yourmovie.data.repository.MovieDetailRepositoryImpl
 import com.example.yourmovie.data.repository.SearchMovieRepositoryImpl
+import com.example.yourmovie.model.repository.MovieDetailRepository
 import com.example.yourmovie.model.repository.SearchMovieRepository
 import dagger.Binds
 import dagger.Module
@@ -14,4 +16,9 @@ abstract class RepositoryModule {
     abstract fun provideSearchMovieRepository(
         searchMovieRepositoryImpl: SearchMovieRepositoryImpl
     ): SearchMovieRepository
+
+    @Binds
+    abstract fun provideMovieDetailRepository(
+        movieDetailRepositoryImpl: MovieDetailRepositoryImpl
+    ): MovieDetailRepository
 }
