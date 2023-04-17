@@ -67,12 +67,12 @@ object MovieMapper {
         )
     }
 
-    private fun belongsToCollectionToData(belongsToCollection: BelongsToCollection): BelongsToCollectionData {
+    private fun belongsToCollectionToData(belongsToCollection: BelongsToCollection?): BelongsToCollectionData {
         return BelongsToCollectionData(
-            backdropPath = belongsToCollection.backdropPath,
-            id = belongsToCollection.id,
-            name = belongsToCollection.name,
-            posterPath = belongsToCollection.posterPath
+            backdropPath = belongsToCollection?.backdropPath,
+            id = belongsToCollection?.id,
+            name = belongsToCollection?.name,
+            posterPath = belongsToCollection?.posterPath
         )
     }
 

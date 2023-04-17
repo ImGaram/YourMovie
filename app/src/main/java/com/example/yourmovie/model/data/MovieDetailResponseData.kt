@@ -6,7 +6,7 @@ import com.example.yourmovie.model.data.detail.GenreData
 data class MovieDetailResponseData(
     val adult: Boolean,
     val backdropPath: String,
-    val belongsToCollection: BelongsToCollectionData,
+    val belongsToCollection: BelongsToCollectionData?,
     val budget: Int,
     val genres: List<GenreData>,
     val homepage: String,
