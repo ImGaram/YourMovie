@@ -37,7 +37,7 @@ fun MovieCard(movieItemData: MovieItemData) {
             onClick = {
                 context.startActivity(
                     Intent(context, DetailActivity::class.java)
-                        .putExtra("data", movieItemData)
+                        .putExtra("movieId", movieItemData.id)
                 )
             },
             modifier = Modifier

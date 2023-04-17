@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,6 +23,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,40 +35,55 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.yourmovie.BuildConfig
 import com.example.yourmovie.R
-import com.example.yourmovie.model.data.search.MovieItemData
+import com.example.yourmovie.model.data.MovieDetailResponseData
 import com.example.yourmovie.presentation.component.text.AutoSizeText
+import com.example.yourmovie.presentation.viewmodel.MovieDetailViewModel
 import com.skydoves.landscapist.coil.CoilImage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailActivity : ComponentActivity() {
+    private val movieDetailViewModel by viewModels<MovieDetailViewModel>()
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val data = intent.getSerializableExtra("data", MovieItemData::class.java)
+        val data = intent.getIntExtra("movieId", 0)
         setContent {
             setContent {
-                DetailScreen(data = data)
+                DetailScreen(
+                    movieId = data,
+                    movieDetailViewModel = movieDetailViewModel
+                )
             }
         }
     }
 }
 
 @Composable
-fun DetailScreen(data: MovieItemData?) {
+fun DetailScreen(
+    movieId: Int?,
+    movieDetailViewModel: MovieDetailViewModel
+) {
     val context = LocalContext.current as Activity
 
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
+        movieDetailViewModel.movieDetail(movieId!!, BuildConfig.API_KEY)
+        val result = movieDetailViewModel.movieDetail.collectAsState()
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
         ) {
             CoilImage(
-                imageModel = { "https://image.tmdb.org/t/p/w400${data?.backdropPath}" },
+                imageModel = { "https://image.tmdb.org/t/p/w400${result.value?.backdropPath}" },
                 modifier = Modifier.fillMaxSize()
             )
 
@@ -82,7 +99,7 @@ fun DetailScreen(data: MovieItemData?) {
             )
         }
 
-        MainMovieView(data = data)
+        MainMovieView(data = result.value)
 
         Text(
             text = "줄거리",
@@ -94,7 +111,7 @@ fun DetailScreen(data: MovieItemData?) {
             )
         )
         Text(
-            text = data?.overview.toString(),
+            text = result.value?.overview.toString(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 15.dp, end = 15.dp)
@@ -103,7 +120,7 @@ fun DetailScreen(data: MovieItemData?) {
 }
 
 @Composable
-fun MainMovieView(data: MovieItemData?) {
+fun MainMovieView(data: MovieDetailResponseData?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -139,6 +156,19 @@ fun MainMovieView(data: MovieItemData?) {
                     fontWeight = FontWeight.Normal
                 )
             )
+
+            var genresString = ""
+            var listIndexCnt = 0
+            data?.genres?.forEach {
+                listIndexCnt++
+                if (listIndexCnt == data.genres.size) genresString += it.name
+                else genresString = genresString+it.name+", "
+            }
+            Text(
+                text = "장르: $genresString",
+                modifier = Modifier.padding(top = 5.dp)
+            )
+
             Text(
                 text = "${data?.originalLanguage}, ${data?.releaseDate}",
                 color = Color.Black,
