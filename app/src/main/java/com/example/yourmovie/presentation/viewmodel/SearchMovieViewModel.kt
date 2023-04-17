@@ -34,7 +34,6 @@ class SearchMovieViewModel @Inject constructor(
             Log.e("TAG", "searchMovie: ${error.printStackTrace()}", error.cause)
         }.collect {
             _searchMovie.value = it
-            Log.d("TAG", "searchMovie search movie: ${_searchMovie.value}")
         }
     }
 }
