@@ -1,4 +1,4 @@
-package com.example.yourmovie.model.data
+package com.example.yourmovie.model.data.search
 
 import java.io.Serializable
 

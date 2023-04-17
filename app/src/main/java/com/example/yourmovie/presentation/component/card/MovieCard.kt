@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.yourmovie.R
-import com.example.yourmovie.model.data.MovieItemData
+import com.example.yourmovie.model.data.search.MovieItemData
 import com.example.yourmovie.presentation.view.detail.DetailActivity
 import com.skydoves.landscapist.coil.CoilImage
 

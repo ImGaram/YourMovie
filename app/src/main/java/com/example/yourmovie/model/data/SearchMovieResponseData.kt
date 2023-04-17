@@ -1,5 +1,7 @@
 package com.example.yourmovie.model.data
 
+import com.example.yourmovie.model.data.search.MovieItemData
+
 data class SearchMovieResponseData(
     val page: Int,
     val results: List<MovieItemData>,

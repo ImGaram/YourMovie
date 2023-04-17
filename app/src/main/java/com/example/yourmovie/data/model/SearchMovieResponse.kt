@@ -1,5 +1,6 @@
-package com.example.yourmovie.data.model.search
+package com.example.yourmovie.data.model
 
+import com.example.yourmovie.data.model.search.MovieItem
 import com.google.gson.annotations.SerializedName
 
 data class SearchMovieResponse(

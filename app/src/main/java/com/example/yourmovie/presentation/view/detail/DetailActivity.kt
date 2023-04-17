@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.yourmovie.R
-import com.example.yourmovie.model.data.MovieItemData
+import com.example.yourmovie.model.data.search.MovieItemData
 import com.example.yourmovie.presentation.component.text.AutoSizeText
 import com.skydoves.landscapist.coil.CoilImage
 

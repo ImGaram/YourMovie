@@ -1,8 +1,8 @@
 package com.example.yourmovie.data.mapper
 
 import com.example.yourmovie.data.model.search.MovieItem
-import com.example.yourmovie.data.model.search.SearchMovieResponse
-import com.example.yourmovie.model.data.MovieItemData
+import com.example.yourmovie.data.model.SearchMovieResponse
+import com.example.yourmovie.model.data.search.MovieItemData
 import com.example.yourmovie.model.data.SearchMovieResponseData
 
 object MovieMapper {

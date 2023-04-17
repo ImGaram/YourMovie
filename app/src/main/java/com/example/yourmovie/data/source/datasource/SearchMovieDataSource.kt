@@ -1,6 +1,6 @@
 package com.example.yourmovie.data.source.datasource
 
-import com.example.yourmovie.data.model.search.SearchMovieResponse
+import com.example.yourmovie.data.model.SearchMovieResponse
 import kotlinx.coroutines.flow.Flow
 
 interface SearchMovieDataSource {
