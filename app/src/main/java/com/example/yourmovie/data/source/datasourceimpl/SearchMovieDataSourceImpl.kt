@@ -1,7 +1,7 @@
 package com.example.yourmovie.data.source.datasourceimpl
 
 import com.example.yourmovie.data.api.SearchMovieService
-import com.example.yourmovie.data.model.SearchMovieResponse
+import com.example.yourmovie.data.model.search.SearchMovieResponse
 import com.example.yourmovie.data.source.datasource.SearchMovieDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
