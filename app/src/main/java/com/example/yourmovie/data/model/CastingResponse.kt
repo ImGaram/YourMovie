@@ -1,9 +1,9 @@
 package com.example.yourmovie.data.model
 
-import com.example.yourmovie.model.data.casting.CastData
+import com.example.yourmovie.data.model.casting.Cast
 import com.google.gson.annotations.SerializedName
 
 data class CastingResponse(
-    @SerializedName("cast") val cast: List<CastData>,
+    @SerializedName("cast") val cast: List<Cast>,
     @SerializedName("id") val id: Int
 )

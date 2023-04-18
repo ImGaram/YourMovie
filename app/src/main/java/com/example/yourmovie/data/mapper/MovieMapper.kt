@@ -1,13 +1,17 @@
 package com.example.yourmovie.data.mapper
 
+import com.example.yourmovie.data.model.CastingResponse
 import com.example.yourmovie.data.model.MovieDetailResponse
 import com.example.yourmovie.data.model.search.MovieItem
 import com.example.yourmovie.data.model.SearchMovieResponse
+import com.example.yourmovie.data.model.casting.Cast
 import com.example.yourmovie.data.model.detail.BelongsToCollection
 import com.example.yourmovie.data.model.detail.Genre
+import com.example.yourmovie.model.data.CastingResponseData
 import com.example.yourmovie.model.data.MovieDetailResponseData
 import com.example.yourmovie.model.data.search.MovieItemData
 import com.example.yourmovie.model.data.SearchMovieResponseData
+import com.example.yourmovie.model.data.casting.CastData
 import com.example.yourmovie.model.data.detail.BelongsToCollectionData
 import com.example.yourmovie.model.data.detail.GenreData
 
@@ -80,6 +84,25 @@ object MovieMapper {
         return GenreData(
             id = genre.id,
             name = genre.name
+        )
+    }
+
+    fun castingResponseToData(castingResponse: CastingResponse): CastingResponseData {
+        return CastingResponseData(
+            cast = castingResponse.cast.map { castToData(it) },
+            id = castingResponse.id
+        )
+    }
+
+    private fun castToData(cast: Cast): CastData {
+        return CastData(
+            character = cast.character,
+            gender = cast.gender,
+            knownForDepartment = cast.knownForDepartment,
+            order = cast.order,
+            name = cast.name,
+            originalName = cast.originalName,
+            profilePath = cast.profilePath
         )
     }
 }
