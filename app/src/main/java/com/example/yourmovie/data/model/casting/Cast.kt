@@ -9,5 +9,5 @@ data class Cast(
     @SerializedName("name") val name: String,
     @SerializedName("order") val order: Int,
     @SerializedName("original_name") val originalName: String,
-    @SerializedName("profile_path") val profile_path: String
+    @SerializedName("profile_path") val profilePath: String
 )
