@@ -1,7 +1,9 @@
 package com.example.yourmovie.di.module
 
+import com.example.yourmovie.model.repository.CastingRepository
 import com.example.yourmovie.model.repository.MovieDetailRepository
 import com.example.yourmovie.model.repository.SearchMovieRepository
+import com.example.yourmovie.model.usecase.CastingUseCase
 import com.example.yourmovie.model.usecase.MovieDetailUseCase
 import com.example.yourmovie.model.usecase.SearchMovieUseCase
 import dagger.Module
@@ -20,4 +22,8 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideMovieDetailUseCase(movieDetailRepository: MovieDetailRepository) = MovieDetailUseCase(movieDetailRepository)
+
+    @Provides
+    @Singleton
+    fun provideCastingUseCase(castingRepository: CastingRepository) = CastingUseCase(castingRepository)
 }
