@@ -1,11 +1,7 @@
 package com.example.yourmovie.di.module
 
-import com.example.yourmovie.data.source.datasource.CastingDataSource
-import com.example.yourmovie.data.source.datasource.MovieDetailDataSource
-import com.example.yourmovie.data.source.datasource.SearchMovieDataSource
-import com.example.yourmovie.data.source.datasourceimpl.CastingDataSourceImpl
-import com.example.yourmovie.data.source.datasourceimpl.MovieDetailDataSourceImpl
-import com.example.yourmovie.data.source.datasourceimpl.SearchMovieDataSourceImpl
+import com.example.yourmovie.data.source.datasource.*
+import com.example.yourmovie.data.source.datasourceimpl.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,4 +24,9 @@ abstract class DataSourceModule {
     abstract fun bindCastingDataSource(
         castingDataSourceImpl: CastingDataSourceImpl
     ): CastingDataSource
+
+    @Binds
+    abstract fun bindPopularMovieDataSource(
+        popularMovieDataSourceImpl: PopularMovieDataSourceImpl
+    ): PopularMovieDataSource
 }

@@ -1,8 +1,6 @@
 package com.example.yourmovie.di.module
 
-import com.example.yourmovie.data.api.CastingService
-import com.example.yourmovie.data.api.MovieDetailService
-import com.example.yourmovie.data.api.SearchMovieService
+import com.example.yourmovie.data.api.*
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -70,5 +68,11 @@ object NetworkModule {
     @Singleton
     fun provideCastingService(retrofit: Retrofit): CastingService {
         return retrofit.create(CastingService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providePopularMovieService(retrofit: Retrofit): PopularMovieService {
+        return retrofit.create(PopularMovieService::class.java)
     }
 }
