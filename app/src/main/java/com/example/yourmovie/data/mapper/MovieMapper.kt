@@ -2,18 +2,22 @@ package com.example.yourmovie.data.mapper
 
 import com.example.yourmovie.data.model.CastingResponse
 import com.example.yourmovie.data.model.MovieDetailResponse
+import com.example.yourmovie.data.model.PopularMovieResponse
 import com.example.yourmovie.data.model.search.MovieItem
 import com.example.yourmovie.data.model.SearchMovieResponse
 import com.example.yourmovie.data.model.casting.Cast
 import com.example.yourmovie.data.model.detail.BelongsToCollection
 import com.example.yourmovie.data.model.detail.Genre
+import com.example.yourmovie.data.model.popular.Result
 import com.example.yourmovie.model.data.CastingResponseData
 import com.example.yourmovie.model.data.MovieDetailResponseData
+import com.example.yourmovie.model.data.PopularMovieResponseData
 import com.example.yourmovie.model.data.search.MovieItemData
 import com.example.yourmovie.model.data.SearchMovieResponseData
 import com.example.yourmovie.model.data.casting.CastData
 import com.example.yourmovie.model.data.detail.BelongsToCollectionData
 import com.example.yourmovie.model.data.detail.GenreData
+import com.example.yourmovie.model.data.popular.ResultData
 
 object MovieMapper {
     fun searchMovieToData(searchMovieResponse: SearchMovieResponse): SearchMovieResponseData {
@@ -103,6 +107,32 @@ object MovieMapper {
             name = cast.name,
             originalName = cast.originalName,
             profilePath = cast.profilePath
+        )
+    }
+
+    fun popularMovieResponseToData(popularMovieResponse: PopularMovieResponse): PopularMovieResponseData {
+        return PopularMovieResponseData(
+            page = popularMovieResponse.page,
+            results = popularMovieResponse.results.map { resultToData(it) },
+            totalPages = popularMovieResponse.totalPages,
+            totalResults = popularMovieResponse.totalResults
+        )
+    }
+
+    private fun resultToData(result: Result): ResultData {
+        return ResultData(
+            adult = result.adult,
+            backdropPath = result.backdropPath,
+            id = result.id,
+            originalLanguage = result.originalLanguage,
+            originalTitle = result.originalTitle,
+            overview = result.overview,
+            posterPath = result.posterPath,
+            releaseDate = result.releaseDate,
+            title = result.title,
+            video = result.video,
+            voteAverage = result.voteAverage,
+            voteCount = result.voteCount
         )
     }
 }
