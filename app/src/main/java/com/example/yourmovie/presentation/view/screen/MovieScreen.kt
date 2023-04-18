@@ -2,22 +2,15 @@ package com.example.yourmovie.presentation.view.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.yourmovie.presentation.viewmodel.PopularMovieViewModel
 
 @Composable
-fun MovieScreen() {
-    Scaffold(
+fun MovieScreen(popularMovieViewModel: PopularMovieViewModel) {
+    Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier.padding(it)
-                .fillMaxSize()
-        ) {
-            Text(text = "movie")
-        }
+
     }
 }

@@ -11,17 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.example.yourmovie.presentation.component.card.MovieCard
 import com.example.yourmovie.presentation.component.search.MovieSearchView
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SearchScreen(
-    searchMovieViewModel: SearchMovieViewModel,
-    navController: NavHostController
-) {
+fun SearchScreen(searchMovieViewModel: SearchMovieViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()

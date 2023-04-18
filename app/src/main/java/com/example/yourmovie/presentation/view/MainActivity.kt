@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.yourmovie.presentation.component.navigation.BottomNavigationView
 import com.example.yourmovie.presentation.component.navigation.YourMovieNavItem
+import com.example.yourmovie.presentation.viewmodel.PopularMovieViewModel
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val searchMovieViewModel by viewModels<SearchMovieViewModel>()
+    private val popularMovieViewModel by viewModels<PopularMovieViewModel>()
 
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,10 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize()
             ) {
                 Box(modifier = Modifier.weight(1f))
-                BottomNavigationView(searchMovieViewModel = searchMovieViewModel)
+                BottomNavigationView(
+                    searchMovieViewModel = searchMovieViewModel,
+                    popularMovieViewModel = popularMovieViewModel
+                )
             }
         }
     }

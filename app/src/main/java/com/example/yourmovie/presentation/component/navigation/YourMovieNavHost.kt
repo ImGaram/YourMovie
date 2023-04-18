@@ -7,22 +7,21 @@ import androidx.navigation.compose.composable
 import com.example.yourmovie.presentation.component.navigation.screen.Screen
 import com.example.yourmovie.presentation.view.screen.MovieScreen
 import com.example.yourmovie.presentation.view.screen.SearchScreen
+import com.example.yourmovie.presentation.viewmodel.PopularMovieViewModel
 import com.example.yourmovie.presentation.viewmodel.SearchMovieViewModel
 
 @Composable
 fun YourMovieNavItem(
     navController: NavHostController,
-    searchMovieViewModel: SearchMovieViewModel
+    searchMovieViewModel: SearchMovieViewModel,
+    popularMovieViewModel: PopularMovieViewModel
 ) {
     NavHost(navController = navController, startDestination = BottomNavItem.Movie.route) {
-        composable(Screen.Movie.route) { MovieScreen() }
-        composable(
-            route = Screen.Search.route
-        ) {
-            SearchScreen(
-                searchMovieViewModel = searchMovieViewModel,
-                navController = navController
-            )
+        composable(Screen.Movie.route) {
+            MovieScreen(popularMovieViewModel = popularMovieViewModel)
+        }
+        composable(route = Screen.Search.route) {
+            SearchScreen(searchMovieViewModel = searchMovieViewModel)
         }
     }
 }
