@@ -7,5 +7,5 @@ data class CastData(
     val name: String,
     val order: Int,
     val originalName: String,
-    val profilePath: String
+    val profilePath: String?
 )

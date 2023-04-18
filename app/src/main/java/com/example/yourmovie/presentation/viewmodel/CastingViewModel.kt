@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourmovie.model.data.CastingResponseData
 import com.example.yourmovie.model.usecase.CastingUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class CastingViewModel @Inject constructor(
     private val castingUseCase: CastingUseCase
 ): ViewModel() {
