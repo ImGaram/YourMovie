@@ -18,7 +18,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -37,8 +41,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.yourmovie.BuildConfig
 import com.example.yourmovie.R
+import com.example.yourmovie.model.data.CastingResponseData
 import com.example.yourmovie.model.data.MovieDetailResponseData
+import com.example.yourmovie.presentation.component.card.CastingProfileCard
 import com.example.yourmovie.presentation.component.text.AutoSizeText
+import com.example.yourmovie.presentation.viewmodel.CastingViewModel
 import com.example.yourmovie.presentation.viewmodel.MovieDetailViewModel
 import com.skydoves.landscapist.coil.CoilImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +53,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailActivity : ComponentActivity() {
     private val movieDetailViewModel by viewModels<MovieDetailViewModel>()
+    private val castingViewModel by viewModels<CastingViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +64,8 @@ class DetailActivity : ComponentActivity() {
             setContent {
                 DetailScreen(
                     movieId = data,
-                    movieDetailViewModel = movieDetailViewModel
+                    movieDetailViewModel = movieDetailViewModel,
+                    castingViewModel = castingViewModel
                 )
             }
         }
@@ -66,16 +75,21 @@ class DetailActivity : ComponentActivity() {
 @Composable
 fun DetailScreen(
     movieId: Int?,
-    movieDetailViewModel: MovieDetailViewModel
+    movieDetailViewModel: MovieDetailViewModel,
+    castingViewModel: CastingViewModel
 ) {
     val context = LocalContext.current as Activity
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(scrollState)
     ) {
         movieDetailViewModel.movieDetail(movieId!!, BuildConfig.API_KEY)
-        val result = movieDetailViewModel.movieDetail.collectAsState()
+        castingViewModel.getCasting(movieId, BuildConfig.API_KEY)
+        val movieDetailResult = movieDetailViewModel.movieDetail.collectAsState()
+        val castingResult = castingViewModel.casting.collectAsState()
 
         Box(
             modifier = Modifier
@@ -83,7 +97,7 @@ fun DetailScreen(
                 .height(200.dp)
         ) {
             CoilImage(
-                imageModel = { "https://image.tmdb.org/t/p/w400${result.value?.backdropPath}" },
+                imageModel = { "https://image.tmdb.org/t/p/w400${movieDetailResult.value?.backdropPath}" },
                 modifier = Modifier.fillMaxSize()
             )
 
@@ -99,7 +113,7 @@ fun DetailScreen(
             )
         }
 
-        MainMovieView(data = result.value)
+        MainMovieView(data = movieDetailResult.value)
 
         Text(
             text = "줄거리",
@@ -111,11 +125,13 @@ fun DetailScreen(
             )
         )
         Text(
-            text = result.value?.overview.toString(),
+            text = movieDetailResult.value?.overview.toString(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 15.dp, end = 15.dp)
         )
+
+        CastingView(data = castingResult.value)
     }
 }
 
@@ -194,6 +210,29 @@ fun MainMovieView(data: MovieDetailResponseData?) {
                         .padding(3.dp),
                     text = "${data?.voteAverage}/10(${data?.voteCount})"
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun CastingView(data: CastingResponseData?) {
+    Text(
+        text = "출연자",
+        modifier = Modifier.padding(start = 15.dp, bottom = 10.dp, top = 10.dp),
+        style = TextStyle(
+            fontSize = 19.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Black
+        )
+    )
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        if (data != null) {
+            items(data.cast) { item ->
+                CastingProfileCard(data = item)
             }
         }
     }
